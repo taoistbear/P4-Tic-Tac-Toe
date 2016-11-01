@@ -4,8 +4,11 @@
 !function() {
   'use strict';
   //******************************************************************************
-  //on-load show start up screen, use tictactoe-01-start.png mockup and start.txt html snippet
+  // *** - DONE - *** on-load show start up screen, use tictactoe-01-start.png mockup and start.txt html snippet
   //******************************************************************************
+  var $startScreen = $('<div class="screen screen-start" id="start"><header><h1>Tic Tac Toe</h1><a href="#" class="button">Start game</a></header><div>');
+  $('body').prepend($startScreen);
+  $('.board').hide();
 
   //******************************************************************************
   //start button removes the start screen and begin the game with game board, use titctactoe-02-inprogress.png mockup and board.txt html snippet
