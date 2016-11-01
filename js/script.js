@@ -11,8 +11,12 @@
   $('.board').hide();
 
   //******************************************************************************
-  //start button removes the start screen and begin the game with game board, use titctactoe-02-inprogress.png mockup and board.txt html snippet
+  // *** - DONE - *** start button removes the start screen and begin the game with game board, use titctactoe-02-inprogress.png mockup and board.txt html snippet
   //******************************************************************************
+  $('#start a').on('click', function() {
+    $('#start').hide();
+    $('.board').show();
+  })
 
   //******************************************************************************
   //add game play for the following rules
