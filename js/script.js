@@ -41,7 +41,7 @@
   //  *** - DONE - *** *current player indicated (hint add class .active)
   //  *on hover the player symbol should appear on the square
   //  *** - DONE - *** *can only click on empty squares add class .box-filled-1 (for ) .box-filled-2 (for x)
-  //  *game ends when 3 in a row (horizontal, diagnoal, virticle) or draw
+  //  *** - DONE - *** *game ends when 3 in a row (horizontal, diagnoal, virticle) or draw
   //******************************************************************************
 
   //SET UP ARRAYS IN OBJECT TO HOLD WINNING COMBINATIONS
@@ -108,15 +108,15 @@
   })
 
   //******************************************************************************
-  //game end: board dissapears with winner or draw screen use tictactoe-03-winner1.png and tictactoe-04-winner4.png mockups along with win.txt snippet for guidance
+  // *** - DONE - *** game end: board dissapears with winner or draw screen use tictactoe-03-winner1.png and tictactoe-04-winner4.png mockups along with win.txt snippet for guidance
   //******************************************************************************
 
   //******************************************************************************
-  //when player pushes new game the board resets
+  // *** - DONE - *** when player pushes new game the board resets
   //******************************************************************************
 
   //******************************************************************************
-  //use a module pattern to wrapped JS in IIF
+  // *** - DONE - *** use a module pattern to wrapped JS in IIF
   //******************************************************************************
 
   //******************************************************************************
