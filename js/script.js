@@ -6,12 +6,23 @@
   //******************************************************************************
   // *** - DONE - *** on-load show start up screen, use tictactoe-01-start.png mockup and start.txt html snippet
   //******************************************************************************
-  //CREATE A DIV TO HOLD THE START SCREEN
+  //CREATE A DIV TO HOLD THE START SCREEN/O WIN SCREEN/X WIN SCREEN/DRAW SCREEN
   var $startScreen = $('<div class="screen screen-start" id="start"><header><h1>Tic Tac Toe</h1><a href="#" class="button">Start game</a></header><div>');
+  var $oWinScreen = $('<div class="screen screen-win screen-win-one" id="finish1"><header><h1>Tic Tac Toe</h1><p class="message">O Wins The Game!</p><a href="#" class="button">New game</a></header></div>');
+  var $xWinScreen = $('<div class="screen screen-win screen-win-two" id="finish2"><header><h1>Tic Tac Toe</h1><p class="message">X Wins The Game!</p><a href="#" class="button">New game</a></header></div>');
+  var $drawScreen = $('<div class="screen screen-win screen-win-tie" id="finish3"><header><h1>Tic Tac Toe</h1><p class="message">Draw! No Game Won</p><a href="#" class="button">New game</a></header></div>');
   //APPEND START SCREE TO BEGING OF BODY
   $('body').prepend($startScreen);
   //HIDE THE GAME BOARD
   $('.board').hide();
+  //HELPER FUNCTION TO HIDE BOARD AND SHOW WIN SCREEN
+  function winScreen(winnerScreen, screenNum) {
+    $('body').prepend(winnerScreen);
+    $('.board').hide()
+    $('.button').click(function() {
+      location.reload();
+    });
+  }
 
   //******************************************************************************
   // *** - DONE - *** start button removes the start screen and begin the game with game board, use titctactoe-02-inprogress.png mockup and board.txt html snippet
@@ -40,8 +51,32 @@
   //KEEPOING PLAYERSELECT VARIABLES GLOBAL IN ORDER FOR ACCESS AND CHECKING
   var player1Select = [];
   var player2Select = [];
+  //HOVER/MOUSEOVER BACKGROUND CHANGES TO PLAYER X OR O
+
+
+
+  //HELPER FUNCTION TO ASSIST WITH MOUSEOVER AND MOUSEOUT
+  function xOrO(backGrd1, backGrd2) {
+
+  }
 
   //CREATE HELPER FUNCTION TO CHECK FOR A WIN!
+  //SET UP FOR LOOP TO CHECK FOR WINNING COMBOS WITH PLAYER SELECT ARRAY
+  function checkForWin(playerArray, winScreenSelection, finishSelect) {
+    for ( var i = 0; i < 8; i++) {
+      var hitCheck = 0;
+      for (var s = 0; s < playerArray.length; s++) {
+        var comoboCheck = winCombo[i];
+        var selectCheck = playerArray[s];
+        if (comoboCheck.indexOf(selectCheck) >= 0) {
+          hitCheck += 1;
+          if (hitCheck === 3) {
+            winScreen(winScreenSelection, finishSelect);
+          }
+        }
+      }
+    }
+  }
 
 
   //START OF GAME PLAY FUNCTION
@@ -53,27 +88,19 @@
     } else if ($('#player1').hasClass('active')) {
       $(this).addClass('box-filled-1');
       player1Select.push($(this).index());
-      //SET UP FOR LOOP TO CHECK FOR WINNING COMBOS WITH PLAYER SELECT ARRAY
-      for (var i = 0; i < 8; i++) {
-        var comoboCheck = winCombo[i];
-        for (var s = 0; s < player1Select.length; s++) {
-          var hitCount = 0;
-          var hitCheck = player1Select[s];
-          console.log(comoboCheck);
-          console.log(hitCheck);
-          // if (comoboCheck.indexOf(player1Select) >= 0) {
-          //   console.log("hit");
-          // }
-        }
-      }
+      checkForWin(player1Select, $oWinScreen, '#finish1');
     } else {
       $(this).addClass('box-filled-2');
       player2Select.push($(this).index());
+      checkForWin(player2Select, $xWinScreen, '#finish2');
     }
 
     //TOGGLE 'ACTIVE' CLASS TO DETERMINE WHO IS PLAYING
     $('.players').toggleClass('active');
     counter++;
+    if (counter === 9) {
+      winScreen($drawScreen, '#finish3');
+    }
   })
   //SET UP HOVER LISTENER TO CHANGE BACKGROUND TO SHOW PLAYER SYMBOL
   $('.box').mouseover(function() {
